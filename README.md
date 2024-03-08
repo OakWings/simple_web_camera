@@ -4,6 +4,8 @@ A Flutter package that provides a simple widget to access and take photos using
 the browser's camera functionality. This package is specifically designed for
 web applications and returns the captured photo as a base64 encoded string.
 
+![](readme/screenshot.png)
+
 ## Features
 
 - Easy to integrate camera access and photo capture functionality for Flutter
