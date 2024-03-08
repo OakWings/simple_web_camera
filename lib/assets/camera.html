@@ -85,7 +85,7 @@
         <div id="capture-border"></div>
         <button id="capture-button"></button>
 
-        <div id="cancel-button"></div>
+        <!-- <div id="cancel-button"></div> -->
     </div>
     <canvas style="display: none;"></canvas>
 
@@ -113,9 +113,9 @@
             window.parent.postMessage(imageDataUrl, "*");
         });
 
-        cancelButton.addEventListener("click", function () {
-            window.parent.postMessage("", "*");
-        });
+        // cancelButton.addEventListener("click", function () {
+        //     window.parent.postMessage("", "*");
+        // });
 
         // Check if the navigator.mediaDevices.getUserMedia is supported
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
