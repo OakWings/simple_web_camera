@@ -1,0 +1,22 @@
+name: simple_web_camera
+description: "A simple and easy to use camera widget for flutter web"
+version: 1.0.0
+
+repository: https://github.com/OakWings/simple_web_camera
+
+environment:
+  sdk: '>=3.2.6 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  assets:
+    - packages/simple_web_camera/assets/camera.html
