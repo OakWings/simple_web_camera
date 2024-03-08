@@ -1,3 +1,7 @@
+## 1.0.3
+
+- Shortened package description because it was too long.
+
 ## 1.0.2
 
 - Updated package description.
