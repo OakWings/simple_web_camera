@@ -1,5 +1,5 @@
 name: simple_web_camera
-description: "A simple and easy to use camera widget for flutter web"
+description: "A Flutter package that provides a simple widget to access and take photos using the browser's camera functionality. This package is specifically designed for web applications and returns the captured photo as a base64 encoded string."
 version: 1.0.1
 
 repository: https://github.com/OakWings/simple_web_camera
