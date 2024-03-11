@@ -82,6 +82,7 @@
             bottom: 25px;
             right: 45px;
             border: none;
+            display: inline-block;
             cursor: pointer;
 
         }
@@ -134,8 +135,20 @@
                 .then(function (stream) {
                     video.srcObject = stream;
                 }).catch(function (error) {
-                    console.log("Error switching cameras: ", error);
+                    if (error.name === "OverconstrainedError") {
+                        console.log("Requested device not available. Trying default device.");
+                        // Attempt to fall back to a default device
+                        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+                            .then(function (stream) {
+                                video.srcObject = stream;
+                            }).catch(function (error) {
+                                console.log("Error accessing default camera.", error);
+                            });
+                    } else {
+                        console.log("Error switching cameras: ", error);
+                    }
                 });
+
         }
 
         function listCameras() {
@@ -145,9 +158,11 @@
                         return device.kind === 'videoinput';
                     });
 
+                    console.log("cameraDevices: " + cameraDevices);
+
                     // Hide the switch camera button if one or no cameras are found
                     if (cameraDevices.length <= 1) {
-                        switchCameraButton.style.display = 'none';
+                        switchCameraButton.style.display = "none";
                     } else {
                         // Ensure it's visible if there are multiple cameras (useful if devices change)
                         switchCameraButton.style.display = 'inline-block';
