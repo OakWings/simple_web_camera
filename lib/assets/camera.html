@@ -21,7 +21,6 @@
         video {
             max-width: 100%;
             max-height: 100%;
-            /* object-fit: contain; */
             display: block;
         }
 
@@ -43,7 +42,6 @@
             border-radius: 50%;
             width: 50px;
             height: 50px;
-            /* background-image: radial-gradient(circle at center, #dbdbdb, #ffffff); */
             z-index: 1000;
 
             border: none;
@@ -100,6 +98,7 @@
     <canvas style="display: none;"></canvas>
 
     <script>
+        var currentFacingMode = "environment";
         var video = document.querySelector("video");
         var canvas = document.querySelector("canvas");
         var context = canvas.getContext("2d");
@@ -107,6 +106,10 @@
         var switchCameraButton = document.getElementById("switch-camera-button");
         var currentCameraIndex = 0;
         var cameraDevices = [];
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            getInitialCamera();
+        });
 
         captureButton.addEventListener("click", function () {
             canvas.width = video.videoWidth;
@@ -116,70 +119,56 @@
             window.parent.postMessage(imageDataUrl, "*");
         });
 
-        function switchCamera() {
-            if (cameraDevices.length > 0) {
-                currentCameraIndex = (currentCameraIndex + 1) % cameraDevices.length;
-                var selectedDeviceId = cameraDevices[currentCameraIndex].deviceId;
-                setCamera(selectedDeviceId);
-            }
-        }
-
         switchCameraButton.addEventListener("click", switchCamera);
 
-        function setCamera(deviceId) {
+        function getInitialCamera() {
             var constraints = {
-                video: { deviceId: { exact: deviceId } },
+                video: { facingMode: "environment" },
                 audio: false
             };
+
             navigator.mediaDevices.getUserMedia(constraints)
                 .then(function (stream) {
                     video.srcObject = stream;
-                }).catch(function (error) {
-                    if (error.name === "OverconstrainedError") {
-                        console.log("Requested device not available. Trying default device.");
-                        // Attempt to fall back to a default device
-                        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-                            .then(function (stream) {
-                                video.srcObject = stream;
-                            }).catch(function (error) {
-                                console.log("Error accessing default camera.", error);
+                    // Once stream is successfully acquired, enumerate devices to check for the number of cameras
+                    navigator.mediaDevices.enumerateDevices()
+                        .then(function (devices) {
+                            cameraDevices = devices.filter(function (device) {
+                                return device.kind === 'videoinput';
                             });
-                    } else {
-                        console.log("Error switching cameras: ", error);
-                    }
-                });
 
-        }
-
-        function listCameras() {
-            navigator.mediaDevices.enumerateDevices()
-                .then(function (devices) {
-                    cameraDevices = devices.filter(function (device) {
-                        return device.kind === 'videoinput';
-                    });
-
-                    console.log("cameraDevices: " + cameraDevices);
-
-                    // Hide the switch camera button if one or no cameras are found
-                    if (cameraDevices.length <= 1) {
-                        switchCameraButton.style.display = "none";
-                    } else {
-                        // Ensure it's visible if there are multiple cameras (useful if devices change)
-                        switchCameraButton.style.display = 'inline-block';
-                    }
-
-                    if (cameraDevices.length > 0) {
-                        setCamera(cameraDevices[currentCameraIndex].deviceId);
-                    }
-                }).catch(function (error) {
-                    console.log("Error listing cameras: ", error);
+                            // Hide the switch camera button if one or no cameras are found
+                            if (cameraDevices.length <= 1) {
+                                switchCameraButton.style.display = "none";
+                            } else {
+                                // Ensure it's visible if there are multiple cameras (useful if devices change)
+                                switchCameraButton.style.display = 'inline-block';
+                            }
+                        });
+                })
+                .catch(function (error) {
+                    console.log("Error accessing the camera: ", error);
+                    // Hide the switch camera button if an error occurs (assuming no camera accessible)
+                    switchCameraButton.style.display = "none";
                 });
         }
 
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            listCameras();
-        } else {
-            console.log("getUserMedia not supported on your browser!");
+
+        function switchCamera() {
+            currentFacingMode = (currentFacingMode === "environment" ? "user" : "environment");
+
+            var constraints = {
+                video: { facingMode: currentFacingMode },
+                audio: false
+            };
+
+            navigator.mediaDevices.getUserMedia(constraints)
+                .then(function (stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function (error) {
+                    console.error("Error switching the camera: ", error);
+                });
         }
     </script>
 </body>
