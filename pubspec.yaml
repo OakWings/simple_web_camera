@@ -20,3 +20,4 @@ dev_dependencies:
 flutter:
   assets:
     - packages/simple_web_camera/assets/camera.html
+    - packages/simple_web_camera/assets/cam.webp

@@ -1,3 +1,7 @@
+## 1.0.7
+
+- Fixed camera icon path issue
+
 ## 1.0.6
 
 - Improved error handling for camera selection to gracefully handle
