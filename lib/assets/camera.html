@@ -79,12 +79,12 @@
 
         #switch-camera-button {
             position: absolute;
-            bottom: 25px;
+            bottom: 28px;
             right: 45px;
             border: none;
             display: inline-block;
             cursor: pointer;
-
+            user-select: none;
         }
     </style>
 </head>
@@ -94,7 +94,7 @@
         <video autoplay playsinline></video>
         <div id="capture-border"></div>
         <button id="capture-button"></button>
-        <img id="switch-camera-button" width="64px" height="64px" src="cam.webp" alt="Switch Camera" />
+        <img id="switch-camera-button" width="48px" height="48px" src="cam.webp" alt="Switch Camera" />
 
     </div>
     <canvas style="display: none;"></canvas>
@@ -162,7 +162,7 @@
 
                     // Hide the switch camera button if one or no cameras are found
                     if (cameraDevices.length <= 1) {
-                        switchCameraButton.style.display = "none";
+                        // switchCameraButton.style.display = "none";
                     } else {
                         // Ensure it's visible if there are multiple cameras (useful if devices change)
                         switchCameraButton.style.display = 'inline-block';
