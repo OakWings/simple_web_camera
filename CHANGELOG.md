@@ -1,3 +1,8 @@
+## 1.0.5
+
+- Added camera switching capability allowing users to switch between multiple
+  cameras.
+
 ## 1.0.4
 
 - Fixed html asset path.

@@ -13,6 +13,9 @@ web applications and returns the captured photo as a base64 encoded string.
 - Returns a base64 encoded string of the captured image, ready to be used within
   your application.
 - Customizable AppBar title and the option to center the title.
+- Camera switching capability allows users to switch between multiple cameras.
+  The switch camera button is intelligently shown only when more than one camera
+  is available, enhancing the user interface and experience.
 
 ## Getting Started
 
