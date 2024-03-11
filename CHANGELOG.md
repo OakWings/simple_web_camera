@@ -1,3 +1,8 @@
+## 1.0.8
+
+- Decreased camera icon size.
+- Removed any selection appearance from the camera icon.
+
 ## 1.0.7
 
 - Fixed camera icon path issue.
