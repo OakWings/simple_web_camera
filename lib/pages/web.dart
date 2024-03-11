@@ -24,7 +24,7 @@ class WebCameraPage extends StatelessWidget {
   Widget build(BuildContext context) {
     String createdViewId = DateTime.now().microsecondsSinceEpoch.toString();
     final html.IFrameElement iframe = html.IFrameElement()
-      ..src = "packages/simple_web_camera/assets/camera.html"
+      ..src = "assets/packages/simple_web_camera/assets/camera.html"
       ..style.border = "none"
       ..style.width = "100%"
       ..style.height = "100%"

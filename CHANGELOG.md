@@ -1,3 +1,7 @@
+## 1.0.4
+
+- Fixed html asset path.
+
 ## 1.0.3
 
 - Shortened package description because it was too long.
