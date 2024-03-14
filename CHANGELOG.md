@@ -1,3 +1,7 @@
+## 1.0.11
+
+- Fixed access of undefined function switchCamera
+
 ## 1.0.10
 
 - Removed camera switching for now as it is not stable on all browsers.

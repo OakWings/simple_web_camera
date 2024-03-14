@@ -120,7 +120,7 @@
         });
 
 
-        switchCameraButton.addEventListener("click", switchCamera);
+        // switchCameraButton.addEventListener("click", switchCamera);
 
         function getInitialCamera() {
             var constraints = {
@@ -140,7 +140,7 @@
 
                             // Hide the switch camera button if one or no cameras are found
                             if (cameraDevices.length <= 1) {
-                                switchCameraButton.style.display = "none";
+                                // switchCameraButton.style.display = "none";
                             } else {
                                 // Ensure it's visible if there are multiple cameras (useful if devices change)
                                 // switchCameraButton.style.display = 'inline-block';
