@@ -1,3 +1,11 @@
+## 1.0.10
+
+- Removed camera switching for now as it is not stable on all browsers.
+
+## 1.0.9
+
+- Changed the way how camera switching is performed to make it more stable.
+
 ## 1.0.8
 
 - Decreased camera icon size.
